@@ -22,8 +22,8 @@ def create_recipe():
 
 @app.route('/recipes', methods=['GET'])
 def get_accounts():
-    accounts = Recipe.query.all()
-    return {'recipes': [format_recipe(account) for account in accounts]}
+    recipes = Recipe.query.all()
+    return {'recipes': [format_recipe(recipe) for recipe in recipes]}
 
 
 @app.route('/recipes/<int:id>', methods=['GET'])
@@ -40,8 +40,8 @@ def update_recipe(id):
     return format_recipe(recipe)
 
 
-@app.route('/accounts/<int:id>', methods=['DELETE'])
-def delete_account(id):
+@app.route('/recipes/<int:id>', methods=['DELETE'])
+def delete_recipe(id):
     recipe = Recipe.query.get(id)
     db.session.delete(recipe)
     db.session.commit()

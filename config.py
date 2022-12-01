@@ -5,7 +5,7 @@ load_dotenv()
 
 
 class Config(object):
-    SECRET_KEY = 'this really needs to be changed'
+    SECRET_KEY = 'this needs to be'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
