@@ -1,5 +1,4 @@
-from iebank_api import routes
-from iebank_api.models import Account
+from recipe_api import routes
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
