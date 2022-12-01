@@ -1,6 +1,4 @@
 from recipe_api import db
-from datetime import datetime
-import string, random
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)

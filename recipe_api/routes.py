@@ -1,5 +1,5 @@
 from flask import Flask, request
-from recipe_api import db, app
+from recipe_api import app,db
 from recipe_api.models import Recipe
 
 
