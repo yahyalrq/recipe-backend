@@ -1,2 +1,2 @@
 # recipe-backend
-A basic recipe app using flask and vue
+ # A basic recipe app using flask and vue
