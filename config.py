@@ -11,7 +11,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-        dbuser=os.getenv('DBUSER'),
+        dbuser=os.getenv('DBUSER')+"@jseijas-dbsrv",
         dbpass=os.getenv('DBPASS'),
         dbhost=os.getenv('DBHOST') + ".postgres.database.azure.com",
         dbname=os.getenv('DBNAME')
