@@ -40,7 +40,7 @@ def update_recipe(id):
     return format_recipe(recipe)
 
 
-@app.route('/accounts/<int:id>', methods=['DELETE'])
+@app.route('/recipes/<int:id>', methods=['DELETE'])
 def delete_account(id):
     recipe = Recipe.query.get(id)
     db.session.delete(recipe)
