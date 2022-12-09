@@ -5,7 +5,7 @@ class Recipe(db.Model):
     name = db.Column(db.String(32), nullable=False)
     ingredients = db.Column(db.String(1000), nullable=False)
     steps= db.Column(db.String(1000), nullable=False, default = 0.0)
-    rate = db.Column(db.Float, nullable=False, default="/5 stars")
+    rate = db.Column(db.Float, nullable=False)
 
     def __init__(self, name, ingredients, steps,rate):
         self.name = name
