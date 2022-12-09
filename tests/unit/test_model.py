@@ -12,4 +12,4 @@ def test_create_account():
     assert recipe.name == 'Paella'
     assert recipe.ingredients == 'ingredients'
     assert recipe.steps == 'steps'
-    assert recipe.rate == 4.9
+    assert recipe.rate == '4.9'
