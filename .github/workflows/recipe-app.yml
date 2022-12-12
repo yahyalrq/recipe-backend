@@ -72,5 +72,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'ylaraqui-assignment-app-prod-bicep'
+        app-name: 'ylaraqui-assignment-app-BE-prod-bicep'
         slot-name: 'Production'
