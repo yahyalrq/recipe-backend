@@ -14,16 +14,15 @@ class ProductionConfig(Config):
         dbuser=os.getenv('DBUSER')+"@jseijas-dbsrv",
         dbpass=os.getenv('DBPASS'),
         dbhost=os.getenv('DBHOST') + ".postgres.database.azure.com",
-        dbname=os.getenv('DBNAME')
+        dbname='ylaraqui-assignment-prod-db'
     )
-
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-        dbuser=os.getenv('DBUSER'),
+        dbuser=os.getenv('DBUSER')+"@jseijas-dbsrv",
         dbpass=os.getenv('DBPASS'),
-        dbhost=os.getenv('DBHOST'),
-        dbname=os.getenv('DBNAME')
+        dbhost=os.getenv('DBHOST')+".postgres.database.azure.com",
+        dbname='ylaraqui-assignment-dev-db'
     )
 
 
