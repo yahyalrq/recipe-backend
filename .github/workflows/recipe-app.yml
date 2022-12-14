@@ -1,13 +1,6 @@
 name: Recipe backend CICD
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-
+on: [push,workflow_dispatch]
 
 permissions:
   contents: read
@@ -43,14 +36,41 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python -m pytest --cov=iebank_api -v
+        python -m pytest --cov=recipe_api -v
     - name: Upload artifact for deployment jobs
       uses: actions/upload-artifact@v2
       with:
         name: python-app
         path: |
           . 
-  deploy:
+  
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: python-app
+        path: .
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Deploy to Azure Web App in DEV'
+      uses: azure/webapps-deploy@v2
+      id: deploy-to-webapp
+      with:
+        app-name: 'ylaraqui-assignment-app-BE-dev-bicep'
+        slot-name: 'Development'
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -68,7 +88,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: 'Deploy to Azure Web App'
+    - name: 'Deploy to Azure Web App in prod'
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
