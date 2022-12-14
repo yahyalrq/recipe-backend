@@ -20,6 +20,7 @@ else:
 db = SQLAlchemy(app)
 
 from recipe_api.models import Recipe
+
 db.create_all()
 CORS(app)
 

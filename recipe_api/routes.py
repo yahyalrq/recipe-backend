@@ -1,5 +1,5 @@
 from flask import Flask, request
-from recipe_api import db, app
+from recipe_api import app,db
 from recipe_api.models import Recipe
 
 
@@ -7,6 +7,9 @@ from recipe_api.models import Recipe
 def hello_world():
     return 'Hello, World!'
 
+@app.route('/skull', methods=['GET'])
+def skull():
+    return 'Hi! This is the BACKEND SKULL! 💀'
 
 @app.route('/recipes', methods=['POST'])
 def create_recipe():
@@ -14,7 +17,8 @@ def create_recipe():
     ingredients = request.json['ingredients']
     steps = request.json['steps']
     rate = request.json['rate']
-    recipe = Recipe(name, ingredients,steps, rate)
+    favorite=request.json['favorite']
+    recipe = Recipe(name, ingredients,steps, rate,favorite)
     db.session.add(recipe)
     db.session.commit()
     return format_recipe(recipe)
@@ -22,8 +26,8 @@ def create_recipe():
 
 @app.route('/recipes', methods=['GET'])
 def get_accounts():
-    accounts = Recipe.query.all()
-    return {'recipes': [format_recipe(account) for account in accounts]}
+    recipes = Recipe.query.all()
+    return {'recipes': [format_recipe(recipe) for recipe in recipes]}
 
 
 @app.route('/recipes/<int:id>', methods=['GET'])
@@ -36,12 +40,16 @@ def get_recipe(id):
 def update_recipe(id):
     recipe = Recipe.query.get(id)
     recipe.name = request.json['name']
+    recipe.ingredients = request.json['ingredients']
+    recipe.steps = request.json['steps']
+    recipe.rate = request.json['rate']
+    recipe.favorite = request.json['favorite']
     db.session.commit()
     return format_recipe(recipe)
 
 
 @app.route('/recipes/<int:id>', methods=['DELETE'])
-def delete_account(id):
+def delete_recipe(id):
     recipe = Recipe.query.get(id)
     db.session.delete(recipe)
     db.session.commit()
@@ -55,4 +63,5 @@ def format_recipe(recipe):
         'ingredients': recipe.ingredients,
         'steps': recipe.steps,
         'rate': recipe.rate,
+        'favorite':recipe.favorite,
     }

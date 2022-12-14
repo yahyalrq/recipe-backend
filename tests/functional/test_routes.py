@@ -30,7 +30,7 @@ def test_create_recipe(testing_client):
     THEN check the response is valid
     """
     response = testing_client.post(
-        '/recipes', json={'name': 'Paella', 'ingredients': 'rice, and others','steps':'put in the water,cook', 'rate':4.9})
+        '/recipes', json={'name': 'Paella', 'ingredients': 'rice, and others','steps':'put in the water,cook', 'rate':4.9, "favorite":"false"})
     assert response.status_code == 200
 
 
@@ -46,7 +46,7 @@ def test_get_particular_account(testing_client):
 
 
 def test_update(testing_client):
-    response = testing_client.put('/recipes/1',json={'name': 'Paella', 'ingredients': 'rice, and others','steps':'put in the water,coook', 'rate':4.9})
+    response = testing_client.put('/recipes/1',json={'name': 'Paella', 'ingredients': 'rice, and others','steps':'put in the water,coook', 'rate':4.9, "favorite":"false"})
     assert response.status_code == 200
 
 def test_delete(testing_client):
