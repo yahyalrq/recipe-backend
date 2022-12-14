@@ -1,6 +1,10 @@
 name: Recipe backend CICD
 
-on: [push,workflow_dispatch]
+on:
+  push:
+      branches: [ "master", "dev" ]
+  pull_request:
+      branches: [ "master", "dev" ]
 
 permissions:
   contents: read
