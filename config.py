@@ -22,7 +22,7 @@ class DevelopmentConfig(Config):
         dbuser=os.getenv('DBUSER')+"@jseijas-dbsrv",
         dbpass=os.getenv('DBPASS'),
         dbhost=os.getenv('DBHOST')+".postgres.database.azure.com",
-        dbname='ylaraqui-assignment-dev-db'
+        dbname=os.getenv('DBNAME')
     )
 
 
