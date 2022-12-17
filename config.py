@@ -14,7 +14,7 @@ class ProductionConfig(Config):
         dbuser=os.getenv('DBUSER')+"@jseijas-dbsrv",
         dbpass=os.getenv('DBPASS'),
         dbhost=os.getenv('DBHOST') + ".postgres.database.azure.com",
-        dbname='ylaraqui-assignment-prod-db'
+        dbname=os.getenv('DBNAME')
     )
 
 class DevelopmentConfig(Config):
